@@ -1,0 +1,15 @@
+<div class="columns" id="signup-form-container">
+  <div class="column is-4 is-offset-4">
+    <%= form_for @changeset, user_path(@conn, :create), fn f -> %>
+      <p class="control">
+        <%= text_input f, :name, class: "input is-medium", placeholder: "用户名"%>
+      </p>
+      <p class="control">
+        <%= password_input f, :password, class: "input is-medium", placeholder: "密码"%>
+      </p>
+
+      <input type="submit" class="button is-medium is-success" value="注册">
+    <% end %>
+  </div>
+</div>
+

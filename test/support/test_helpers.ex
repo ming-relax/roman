@@ -1,6 +1,8 @@
 defmodule Roman.TestHelpers do
   alias Roman.Repo
   alias Roman.Topic
+  alias Roman.Post
+
   use Roman.Web, :controller
 
   def insert_user(attrs \\ %{}) do
@@ -25,7 +27,7 @@ defmodule Roman.TestHelpers do
     {user, put_req_header(conn, "authorization", "Bearer #{jwt}")}
   end
 
-  def create_topic(user,attrs \\ %{}) do
+  def create_topic(user, attrs \\ %{}) do
     topic_params = Dict.merge(
       %{
         title: "Some random title #{Base.encode16(:crypto.rand_bytes(8))}",
@@ -40,5 +42,21 @@ defmodule Roman.TestHelpers do
       |> Topic.changeset(topic_params)
 
     Repo.insert!(changeset)
+  end
+
+  def create_post(user, topic, attrs \\ %{}) do
+    post_params = Dict.merge(
+      %{
+        content: "Some random content #{Base.encode16(:crypto.rand_bytes(8))}",
+      },
+      attrs
+    )
+
+    case Roman.PostCreator.create(user, topic.id, post_params) do
+      {:ok, post} ->
+        post
+      {:error, reason} ->
+        raise "error: #{reason}"
+    end
   end
 end

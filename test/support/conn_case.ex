@@ -26,6 +26,8 @@ defmodule Roman.ConnCase do
       import Ecto.Query
 
       import Roman.Router.Helpers
+      import Roman.TestHelpers
+
 
       # The default endpoint for testing
       @endpoint Roman.Endpoint

@@ -8,9 +8,10 @@ defmodule Roman.Topic do
 
     field :last_post_user_id, :integer
     field :last_posted_at, Ecto.DateTime
-    field :posts_count, :integer
+    field :posts_count, :integer, default: 0
 
     belongs_to :user, Roman.User
+
     has_many :posts, Roman.Post
 
     timestamps()
@@ -21,7 +22,7 @@ defmodule Roman.Topic do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :content])
+    |> cast(params, [:title, :content, :posts_count, :last_post_user_id, :last_posted_at])
     |> validate_required([:title, :content])
   end
 

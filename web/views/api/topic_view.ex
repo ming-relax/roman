@@ -13,6 +13,9 @@ defmodule Roman.Api.TopicView do
     %{id: topic.id,
       title: topic.title,
       content: topic.content,
-      user_id: topic.user_id}
+      user_name: topic.user_name,
+      inserted_at: topic.inserted_at,
+      posts_count: topic.posts_count
+    }
   end
 end

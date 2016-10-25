@@ -1,7 +1,9 @@
 defmodule Roman.Api.TopicController do
   use Roman.Web, :controller
-
   alias Roman.Topic
+
+  plug Guardian.Plug.EnsureAuthenticated,
+    [handler: Roman.UnauthorizedError] when action in [:create, :update, :delete]
 
   def index(conn, _params) do
     topics = Repo.all(Topic)
@@ -9,10 +11,15 @@ defmodule Roman.Api.TopicController do
   end
 
   def create(conn, %{"topic" => topic_params}) do
-    changeset = Topic.changeset(%Topic{}, topic_params)
+    user = Guardian.Plug.current_resource(conn)
+    changeset =
+      user
+      |> build_assoc(:topics)
+      |> Topic.changeset(topic_params)
 
     case Repo.insert(changeset) do
       {:ok, topic} ->
+        topic = Map.put(topic, :user_name, user.name)
         conn
         |> put_status(:created)
         |> put_resp_header("location", topic_path(conn, :show, topic))

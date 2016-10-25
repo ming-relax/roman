@@ -9,9 +9,13 @@ defmodule Roman.Router do
     plug :put_secure_browser_headers
   end
 
-
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", Roman do
@@ -29,11 +33,11 @@ defmodule Roman.Router do
   end
 
   scope "/api", Roman do
-    pipe_through :api
+    pipe_through [:api, :api_auth]
 
     post "/register", Api.AuthController, :register
     post "/login", Api.AuthController, :login
-    resources "/topics", Api.TopicController, except: [:new, :edit]
-    resources "/posts", Api.PostController, except: [:new, :edit]
+    resources "/topics", Api.TopicController, only: [:index, :show, :create, :update]
+    resources "/:topic_id/posts", Api.PostController, only: [:create, :update]
   end
 end

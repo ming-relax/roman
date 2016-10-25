@@ -12,6 +12,7 @@ defmodule Roman.Api.PostView do
   def render("post.json", %{post: post}) do
     %{id: post.id,
       content: post.content,
+      inserted_at: post.inserted_at,
       topic_id: post.topic_id}
   end
 end

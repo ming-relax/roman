@@ -4,7 +4,7 @@ defmodule Roman.Post do
   schema "posts" do
     field :content, :string
     belongs_to :topic, Roman.Topic
-
+    belongs_to :user, Roman.User
     timestamps()
   end
 

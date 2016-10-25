@@ -1,32 +1,43 @@
 defmodule Roman.Api.PostController do
   use Roman.Web, :controller
-
   alias Roman.Post
+  alias Roman.Topic
 
-  def index(conn, _params) do
-    posts = Repo.all(Post)
-    render(conn, "index.json", posts: posts)
-  end
+  plug Guardian.Plug.EnsureAuthenticated, handler: Roman.UnauthorizedError
 
-  def create(conn, %{"post" => post_params}) do
-    changeset = Post.changeset(%Post{}, post_params)
 
-    case Repo.insert(changeset) do
+  def create(conn, %{"post" => post_params, "topic_id" => topic_id}) do
+    user = Guardian.Plug.current_resource(conn)
+    topic = Repo.get(Topic, topic_id)
+    post_changeset =
+      user
+      |> build_assoc(:posts, topic_id: topic.id)
+      |> Post.changeset(post_params)
+
+
+    case Repo.transaction(fn ->
+      post = Repo.insert!(post_changeset)
+
+      topic_changeset = Topic.changeset(
+                          topic,
+                          %{
+                            posts_count: topic.posts_count + 1,
+                            last_post_user_id: user.id,
+                            last_posted_at: post.inserted_at
+                          })
+
+      Repo.update!(topic_changeset)
+      post
+    end) do
       {:ok, post} ->
         conn
         |> put_status(:created)
-        |> put_resp_header("location", post_path(conn, :show, post))
         |> render("show.json", post: post)
-      {:error, changeset} ->
+      {:error, post} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Roman.ChangesetView, "error.json", changeset: changeset)
-    end
-  end
-
-  def show(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id)
-    render(conn, "show.json", post: post)
+        |> render(Roman.ChangesetView, "error.json", changeset: post_changeset)
+      end
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
@@ -41,15 +52,5 @@ defmodule Roman.Api.PostController do
         |> put_status(:unprocessable_entity)
         |> render(Roman.ChangesetView, "error.json", changeset: changeset)
     end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    post = Repo.get!(Post, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(post)
-
-    send_resp(conn, :no_content, "")
   end
 end

@@ -5,6 +5,8 @@ defmodule Roman.User do
     field :name, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+    has_many :topics, Roman.Topic
+    has_many :posts, Roman.Post
 
     timestamps()
   end

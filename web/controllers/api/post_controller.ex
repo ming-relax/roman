@@ -3,10 +3,10 @@ defmodule Roman.Api.PostController do
   alias Roman.Post
   alias Roman.Topic
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: Roman.UnauthorizedError
+  plug Guardian.Plug.EnsureAuthenticated,
+    [handler: Roman.UnauthorizedError] when action in [:create, :update]
 
-
-  def create(conn, %{"post" => post_params, "topic_id" => topic_id}) do
+  def create(conn, %{"topic_id" => topic_id, "post" => post_params}) do
     user = Guardian.Plug.current_resource(conn)
     case Roman.PostCreator.create(user, topic_id, post_params) do
       {:ok, post} ->
@@ -21,7 +21,7 @@ defmodule Roman.Api.PostController do
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    post = Repo.get!(Post, id)
+    post = Repo.get(Post, id)
     changeset = Post.changeset(post, post_params)
 
     case Repo.update(changeset) do

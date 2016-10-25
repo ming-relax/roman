@@ -66,16 +66,23 @@ defmodule Roman.PostControllerTest do
 
   end
 
-  test "updates and renders chosen resource when data is valid", %{conn: conn} do
+  test "updates post content", %{conn: conn} do
     topic_user = insert_user()
     topic = create_topic(topic_user)
 
-    {_, conn} = create_user_and_login_the_conn(conn)
+    {post_user, conn} = create_user_and_login_the_conn(conn)
 
-    post = Repo.insert! %Post{}
+    post = create_post(post_user, topic)
+
+    assert post.content != "some content"
+
     conn = put conn, post_path(conn, :update, topic.id, post), post: @valid_attrs
+
     assert json_response(conn, 200)["id"]
-    assert Repo.get_by(Post, @valid_attrs)
+
+    updated_post = Repo.get_by(Post, %{id: post.id})
+
+    assert updated_post.content == "some content"
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do

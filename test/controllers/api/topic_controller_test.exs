@@ -71,23 +71,29 @@ defmodule Roman.TopicControllerTest do
     assert response(conn, 404)
   end
 
-  # test "updates and renders chosen resource when data is valid", %{conn: conn} do
-  #   topic = Repo.insert! %Topic{}
-  #   conn = put conn, topic_path(conn, :update, topic), topic: @valid_attrs
-  #   assert json_response(conn, 200)["data"]["id"]
-  #   assert Repo.get_by(Topic, @valid_attrs)
-  # end
+  test "updates topic title", %{conn: conn} do
+    {topic_user, conn} = create_user_and_login_the_conn(conn)
+    topic = create_topic(topic_user)
+    assert topic.title != "some content"
 
-  # test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-  #   topic = Repo.insert! %Topic{}
-  #   conn = put conn, topic_path(conn, :update, topic), topic: @invalid_attrs
-  #   assert json_response(conn, 422)["errors"] != %{}
-  # end
 
-  # test "deletes chosen resource", %{conn: conn} do
-  #   topic = Repo.insert! %Topic{}
-  #   conn = delete conn, topic_path(conn, :delete, topic)
-  #   assert response(conn, 204)
-  #   refute Repo.get(Topic, topic.id)
-  # end
+    conn = put conn, topic_path(conn, :update, topic), topic: @valid_attrs
+    assert json_response(conn, 200)["id"]
+    updated_topic = Repo.get_by(Topic, %{id: topic.id})
+
+    assert updated_topic.title == "some content"
+  end
+
+  test "updates topic content", %{conn: conn} do
+    {topic_user, conn} = create_user_and_login_the_conn(conn)
+    topic = create_topic(topic_user)
+    assert topic.content != "some content"
+
+
+    conn = put conn, topic_path(conn, :update, topic), topic: @valid_attrs
+    assert json_response(conn, 200)["id"]
+    updated_topic = Repo.get_by(Topic, %{id: topic.id})
+
+    assert updated_topic.content == "some content"
+  end
 end

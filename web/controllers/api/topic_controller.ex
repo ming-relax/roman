@@ -5,7 +5,7 @@ defmodule Roman.Api.TopicController do
   alias Roman.User
 
   plug Guardian.Plug.EnsureAuthenticated,
-    [handler: Roman.UnauthorizedError] when action in [:create, :update, :delete]
+    [handler: Roman.UnauthorizedError] when action in [:create, :delete]
 
   def index(conn, _params) do
     topic_with_last_reply = from t in Topic,
@@ -91,12 +91,14 @@ defmodule Roman.Api.TopicController do
   end
 
   def update(conn, %{"id" => id, "topic" => topic_params}) do
+    user = Guardian.Plug.current_resource(conn)
     topic = Repo.get!(Topic, id)
     changeset = Topic.changeset(topic, topic_params)
 
     case Repo.update(changeset) do
       {:ok, topic} ->
-        render(conn, "show.json", topic: topic)
+        topic = Map.put(topic, :creator_user_name, user.name)
+        render(conn, "topic_simple.json", topic: topic)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

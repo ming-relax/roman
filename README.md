@@ -42,6 +42,8 @@ https://github.com/ming-relax/roman/blob/master/play.rb
 
   三个 Controller: https://github.com/ming-relax/roman/tree/master/web/controllers/api
 
+  创建 post: https://github.com/ming-relax/roman/blob/master/web/post_creator.ex
+
   (PS: Controller 级别的测试每一个都有)
 
 

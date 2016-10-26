@@ -52,7 +52,7 @@ you will get a `jwt` token with expiration time.
 
 The `jwt` token is used for authentication; you need to add the authentication header, for example:
 
-`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg` for endpoint that needs authentication.
+`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA` for endpoint that needs authentication.
 
 + Request (application/json)
 
@@ -63,11 +63,11 @@ The `jwt` token is used for authentication; you need to add the authentication h
             }
         }
 
-        
+
 + Response 201 (applicaiton/json)
 
         {
-            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg",
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA",
             "exp": "32312111"
         }
 
@@ -79,7 +79,7 @@ Login the user to get the `jwt` token.
 
 The `jwt` token is used for authentication; you need to add the authentication header, for example:
 
-`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg` for endpoint that needs authentication.
+`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA` for endpoint that needs authentication.
 
 
 + Request (application/json)
@@ -94,7 +94,7 @@ The `jwt` token is used for authentication; you need to add the authentication h
 + Response 201 (applicaiton/json)
 
         {
-            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg",
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA",
             "exp": "32312111"
         }
 
@@ -108,7 +108,7 @@ List all topics.
 + Response 200 (application/json)
 
     + Attributes (array[TopicSimple])
-    
+
 
 ### Create a New Topic [POST]
 
@@ -118,7 +118,7 @@ Authentication required. Create a new topic.
 
     + Headers
 
-            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA
 
     + Body
 
@@ -128,11 +128,11 @@ Authentication required. Create a new topic.
                     "content": "Some nice content for the topic"
                 }
             }
-            
+
 + Response 201 (application/json)
 
     + Body
-    
+
             + Attributes (TopicSimple)
 
 
@@ -149,7 +149,7 @@ Show a topic's details including each post's information.
 + Response 200 (application/json)
 
     + Attributes (array[TopicDetail])
-        
+
 
 ### Update a Topic [PUT]
 
@@ -163,8 +163,8 @@ Authentication required. Update a topic's title or content.
 
     + Headers
 
-            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
-            
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA
+
     + Body
 
             {
@@ -173,14 +173,14 @@ Authentication required. Update a topic's title or content.
                     "content": "Some nice content for the topic"
                 }
             }
-            
-    
+
+
 + Response 200 (application/json)
 
     + Body
 
             + Attributes (TopicSimple)
-            
+
 
 
 ## Posts [/api/{topic_id}/posts]
@@ -199,10 +199,10 @@ Authentication required. Create a new post (reply to a topic).
 
     + Headers
 
-            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
-        
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA
+
     + Body
-    
+
             {
                 "post": {
                     "content": "some reply you want to create"
@@ -212,10 +212,10 @@ Authentication required. Create a new post (reply to a topic).
 + Response 201 (application/json)
 
     + Body
-    
+
             + Attributes (PostSimple)
 
-            
+
 ## Post [/api/{topic_id}/posts/{post_id}]
 
 ### Update a Post [PUT]
@@ -231,10 +231,10 @@ Authentication required. Update a post's content.
 
     + Headers
 
-            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
-        
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDg2MjAzLCJpYXQiOjE0Nzc0OTQyMDMsImlzcyI6IlJvbWFuIiwianRpIjoiZThiYTkzYjYtMGU4Yy00MzM5LTk1ZDItNjc4N2IzMmM2MDVjIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.Bs_LSUGNBCZNazO2WCHftpPMjWbzuX0Jsl8xis48ztSPP_ihapkbY1N1joVjZjPz1VKwYhu9TQs92xYOXq7-MA
+
     + Body
-    
+
             {
                 "post": {
                     "content": "some reply you want to create"

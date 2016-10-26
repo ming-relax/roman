@@ -5,9 +5,42 @@ HOST: https://roman-forum.herokuapp.com/
 
 roman-form is a simple API allowing consumers to manage topics and posts in a forum.
 
-Please read the *Authentication* part before you 
+Some of the api needs authentication, please see the *Login* section if the endpoint needs authentication.
 
+You can play with the real data in this website, it uses a demo built at https://roman-forum.herokuapp.com/
 
+# Data Structures
+
+## TopicSimple
++ id: 42 (number)
++ title: Hello World (string)
++ posts_count: 1 (number)
++ inserted_at: `2016-10-26T03:37:51`
++ last_post_user_name: Ming
++ last_posted_at: `2016-10-26T03:37:51`
+
+## PostSimple
++ id: 100 (number)
++ content: "Some reply" (string)
++ inserted_at: `2016-10-26T03:37:51`
++ updated_at: `2016-10-26T03:37:51`
++ topic_id: 100
+
+## PostItem
++ id: 100 (number)
++ content: "Some reply" (string)
++ post_user_name: "Ming" (string)
++ inserted_at: `2016-10-26T03:37:51`
+
+## TopicDetail
++ id: 42 (number)
++ title: Hello World (string)
++ content: Content of this topic (string)
++ posts_count: 1 (number)
++ inserted_at: `2016-10-26T03:37:51`
++ last_post_user_name: Ming
++ last_posted_at: `2016-10-26T03:37:51`
++ posts (array[PostItem]) - A collection of post
 
 
 ## Registration [/api/register/]
@@ -16,6 +49,10 @@ Please read the *Authentication* part before you
 
 Register a user throught the API. You should pass the user credentials in the http POST body, and
 you will get a `jwt` token with expiration time.
+
+The `jwt` token is used for authentication; you need to add the authentication header, for example:
+
+`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg` for endpoint that needs authentication.
 
 + Request (application/json)
 
@@ -30,154 +67,182 @@ you will get a `jwt` token with expiration time.
 + Response 201 (applicaiton/json)
 
         {
-            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og",
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg",
             "exp": "32312111"
         }
 
-## Topics [/topics]
+## Login [/api/login/]
+
+### Login and get the token [POST]
+
+Login the user to get the `jwt` token.
+
+The `jwt` token is used for authentication; you need to add the authentication header, for example:
+
+`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg` for endpoint that needs authentication.
+
+
++ Request (application/json)
+
+        {
+            "user":  {
+              "name": "test_user_name",
+              "password": "test_password"
+            }
+        }
+
++ Response 201 (applicaiton/json)
+
+        {
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg",
+            "exp": "32312111"
+        }
+
+
+## Topics [/api/topics]
 
 ### List All Topics [GET]
 
+List all topics.
+
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+    + Attributes (array[TopicSimple])
+    
 
 ### Create a New Topic [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+Authentication required. Create a new topic.
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
     + Headers
 
-            Location: /questions/2
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "topic": {
+                    "title": "Some nice title for the topic",
+                    "content": "Some nice content for the topic"
+                }
             }
             
-## Posts [/:topic_id/posts]
++ Response 201 (application/json)
 
-### List All Posts [GET]
+    + Body
+    
+            + Attributes (TopicSimple)
+
+
+## Topic [/api/topics/{topic_id}]
+
+### Show a Topic [GET]
+
+Show a topic's details including each post's information.
+
++ Parameters
+
+    + topic_id - Unique id for this topic
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+    + Attributes (array[TopicDetail])
+        
 
-### Create a New Post [POST]
+### Update a Topic [PUT]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+Authentication required. Update a topic's title or content.
+
++ Parameters
+
+    + topic_id - Unique id for this topic
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
     + Headers
 
-            Location: /questions/2
-
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
+            
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "topic": {
+                    "title": "Some nice title for the topic",
+                    "content": "Some nice content for the topic"
+                }
             }
+            
+    
++ Response 200 (application/json)
+
+    + Body
+
+            + Attributes (TopicSimple)
+            
+
+
+## Posts [/api/{topic_id}/posts]
+
+
+### Create a New Post [POST]
+
+Authentication required. Create a new post (reply to a topic).
+
+
++ Parameters
+
+    + topic_id - Unique id of the topic this post will be created with
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
+        
+    + Body
+    
+            {
+                "post": {
+                    "content": "some reply you want to create"
+                }
+            }
+
++ Response 201 (application/json)
+
+    + Body
+    
+            + Attributes (PostSimple)
+
+            
+## Post [/api/{topic_id}/posts/{post_id}]
+
+### Update a Post [PUT]
+
+Authentication required. Update a post's content.
+
++ Parameters
+
+    + topic_id - Unique id for the topis this post is created with
+    + post_id - Unique id for this post
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg
+        
+    + Body
+    
+            {
+                "post": {
+                    "content": "some reply you want to create"
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            + Attributes (PostSimple)

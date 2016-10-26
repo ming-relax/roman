@@ -34,33 +34,45 @@ you will get a `jwt` token with expiration time.
             "exp": "32312111"
         }
 
+## Login [/api/login/]
+
+### Logig and get the token [POST]
+
+Login the user to get the `jwt` token needed for `create`, `update` topics and posts
+
++ Request (application/json)
+
+        {
+            "user":  {
+              "name": "test_user_name",
+              "password": "test_password"
+            }
+        }
+
++ Response 201 (applicaiton/json)
+
+        {
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og",
+            "exp": "32312111"
+        }
+
 ## Topics [/topics]
+
+### TopicItem (object)
++ id: 42 (number)
++ title: Hello World (string)
++ content: Content of this topic (string)
++ posts_count: 1 (number, the number of reply this topic have)
++ inserted_at: 2016-10-26T03:37:51 (string, the time this topic created)
++ last_post_user_name: Ming (string, the user name of the last reply)
++ last_posted_at: 2016-10-26T03:37:51 (string, the time last reply created)
+
 
 ### List All Topics [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+        (array[TopicItem])
 
 ### Create a New Topic [POST]
 

@@ -7,11 +7,32 @@ roman-form is a simple API allowing consumers to manage topics and posts in a fo
 
 Please read the *Authentication* part before you 
 
-## Autentication
 
-### Register
 
-### Login
+
+## Registration [/api/register/]
+
+### Register a User [POST]
+
+Register a user throught the API. You should pass the user credentials in the http POST body, and
+you will get a `jwt` token with expiration time.
+
++ Request (application/json)
+
+        {
+            "user":  {
+              "name": "test_user_name",
+              "password": "test_password"
+            }
+        }
+
+        
++ Response 201 (applicaiton/json)
+
+        {
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og",
+            "exp": "32312111"
+        }
 
 ## Topics [/topics]
 

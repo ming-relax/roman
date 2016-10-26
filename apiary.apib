@@ -8,7 +8,16 @@ roman-form is a simple API allowing consumers to manage topics and posts in a fo
 Please read the *Authentication* part before you 
 
 
+# Data Structures
 
+## TopicItemInList
++ id: 42 (number)
++ title: Hello World (string)
++ content: Content of this topic (string)
++ posts_count: 1 (number)
++ inserted_at: `2016-10-26T03:37:51`
++ last_post_user_name: Ming
++ last_posted_at: `2016-10-26T03:37:51`
 
 ## Registration [/api/register/]
 
@@ -56,139 +65,118 @@ Login the user to get the `jwt` token needed for `create`, `update` topics and p
             "exp": "32312111"
         }
 
+
 ## Topics [/api/topics]
-
-### TopicItem (object)
-+ id: 42 (number)
-+ title: Hello World (string)
-+ content: Content of this topic (string)
-+ posts_count: 1 (number, the number of reply this topic have)
-+ inserted_at: 2016-10-26T03:37:51 (string, the time this topic created)
-+ last_post_user_name: Ming (string, the user name of the last reply)
-+ last_posted_at: 2016-10-26T03:37:51 (string, the time last reply created)
-
 
 ### List All Topics [GET]
 
 + Response 200 (application/json)
-    + Attributes (array[TopicItem])
+
+    + Attributes (array[TopicItemInList])
+    
 
 ### Create a New Topic [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+**You need to get a valid *jwt* token and put it in your http header when you create a topic.
+To get a valid jwt token, please see the *Login* section.**
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
     + Headers
 
-            Location: /questions/2
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NzkyODIwOTQsImlhdCI6MTQ3NjY5MDA5NCwia2lkIjoiYTdlODllZDIxIiwidWlkIjoiNzExOTEzNjcwNSJ9.MTYupgkaiCw47YOiMUud6ksgqidBSlrOCXdJPqo87BX6-xkGjsbewwadOc7O3jriU8wQG-VhqILMsEWe6Hcvdjg3yiVsWiiPUwMotNHRuWqZQ-HupEoT7p_O_su2O9XFG38yLZl6oYtH7Y-pmNbqK0HIY3jxWLhietT1i7bX6c_mIROz4lJTO9cqYy0UntDGTDDmhfuWYT5zAsSzGXKodzh2Cyjy1octFFj-fTpR4t3bUUEcU8xC0PXn1ojrfzdtIzKxXPgExoyubacIcvkmAyNQNSaEqvpEwCJ8E5r7o6OgYgzhlGiK2Jd7tA_LAVs8F4R5_TKJre9tci9H
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "title": "Some nice title for the topic",
+                "content": "Some nice content for the topic"
             }
             
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "title": "Some nice title for the topic",
+                "content": "Some nice content for the topic"
+            }
+            
+### Update a Topic [PUT]
+**You need to get a valid *jwt* token and put it in your http header when you create a topic.
+To get a valid jwt token, please see the *Login* section.**
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NzkyODIwOTQsImlhdCI6MTQ3NjY5MDA5NCwia2lkIjoiYTdlODllZDIxIiwidWlkIjoiNzExOTEzNjcwNSJ9.MTYupgkaiCw47YOiMUud6ksgqidBSlrOCXdJPqo87BX6-xkGjsbewwadOc7O3jriU8wQG-VhqILMsEWe6Hcvdjg3yiVsWiiPUwMotNHRuWqZQ-HupEoT7p_O_su2O9XFG38yLZl6oYtH7Y-pmNbqK0HIY3jxWLhietT1i7bX6c_mIROz4lJTO9cqYy0UntDGTDDmhfuWYT5zAsSzGXKodzh2Cyjy1octFFj-fTpR4t3bUUEcU8xC0PXn1ojrfzdtIzKxXPgExoyubacIcvkmAyNQNSaEqvpEwCJ8E5r7o6OgYgzhlGiK2Jd7tA_LAVs8F4R5_TKJre9tci9H
+    
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "title": "Some nice title for the topic",
+                "content": "Some nice content for the topic"
+            }
+            
+
+
 ## Posts [/:topic_id/posts]
 
-### List All Posts [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
 
 ### Create a New Post [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+**You need to get a valid *jwt* token and put it in your http header when you create a topic.
+To get a valid jwt token, please see the *Login* section.**
+
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
     + Headers
 
-            Location: /questions/2
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NzkyODIwOTQsImlhdCI6MTQ3NjY5MDA5NCwia2lkIjoiYTdlODllZDIxIiwidWlkIjoiNzExOTEzNjcwNSJ9.MTYupgkaiCw47YOiMUud6ksgqidBSlrOCXdJPqo87BX6-xkGjsbewwadOc7O3jriU8wQG-VhqILMsEWe6Hcvdjg3yiVsWiiPUwMotNHRuWqZQ-HupEoT7p_O_su2O9XFG38yLZl6oYtH7Y-pmNbqK0HIY3jxWLhietT1i7bX6c_mIROz4lJTO9cqYy0UntDGTDDmhfuWYT5zAsSzGXKodzh2Cyjy1octFFj-fTpR4t3bUUEcU8xC0PXn1ojrfzdtIzKxXPgExoyubacIcvkmAyNQNSaEqvpEwCJ8E5r7o6OgYgzhlGiK2Jd7tA_LAVs8F4R5_TKJre9tci9H
+        
+    + Body
+    
+            {
+                "post": {
+                    "content": "some reply you want to create"
+                }
+            }
+
++ Response 201 (application/json)
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "id": 123
+            }
+            
+### Update a Post [PUT]
+**You need to get a valid *jwt* token and put it in your http header when you create a topic.
+To get a valid jwt token, please see the *Login* section.**
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NzkyODIwOTQsImlhdCI6MTQ3NjY5MDA5NCwia2lkIjoiYTdlODllZDIxIiwidWlkIjoiNzExOTEzNjcwNSJ9.MTYupgkaiCw47YOiMUud6ksgqidBSlrOCXdJPqo87BX6-xkGjsbewwadOc7O3jriU8wQG-VhqILMsEWe6Hcvdjg3yiVsWiiPUwMotNHRuWqZQ-HupEoT7p_O_su2O9XFG38yLZl6oYtH7Y-pmNbqK0HIY3jxWLhietT1i7bX6c_mIROz4lJTO9cqYy0UntDGTDDmhfuWYT5zAsSzGXKodzh2Cyjy1octFFj-fTpR4t3bUUEcU8xC0PXn1ojrfzdtIzKxXPgExoyubacIcvkmAyNQNSaEqvpEwCJ8E5r7o6OgYgzhlGiK2Jd7tA_LAVs8F4R5_TKJre9tci9H
+        
+    + Body
+    
+            {
+                "post": {
+                    "content": "some reply you want to create"
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": 123
             }

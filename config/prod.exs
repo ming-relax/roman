@@ -28,6 +28,16 @@ config :roman, Roman.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "Roman",
+  ttl: { 30, :days },
+  verify_issuer: true, # optional
+  secret_key: System.get_env("SECRET_KEY_BASE"),
+  serializer: Roman.GuardianSerializer
+
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

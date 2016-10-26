@@ -10,6 +10,10 @@ API 文档在这里 http://docs.romanforum.apiary.io/#
 
 API 文档是交互式的，会利用真实的 Demo 系统返回结果。
 
+# 要求的测试脚本
+
+https://github.com/ming-relax/roman/blob/master/play.rb
+
 
 # 技术选型
 
@@ -39,6 +43,8 @@ API 文档是交互式的，会利用真实的 Demo 系统返回结果。
   三个 Controller: https://github.com/ming-relax/roman/tree/master/web/controllers/api
 
   (PS: Controller 级别的测试每一个都有)
+
+
 
 # 性能分析
 

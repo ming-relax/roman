@@ -5,8 +5,9 @@ HOST: https://roman-forum.herokuapp.com/
 
 roman-form is a simple API allowing consumers to manage topics and posts in a forum.
 
-Please read the *Authentication* part before you 
+Some of the api needs authentication, please see the *Login* section if the endpoint needs authentication.
 
+You can play with the real data in this website, it uses a demo built at https://roman-forum.herokuapp.com/
 
 # Data Structures
 
@@ -17,6 +18,13 @@ Please read the *Authentication* part before you
 + inserted_at: `2016-10-26T03:37:51`
 + last_post_user_name: Ming
 + last_posted_at: `2016-10-26T03:37:51`
+
+## PostSimple
++ id: 100 (number)
++ content: "Some reply" (string)
++ inserted_at: `2016-10-26T03:37:51`
++ updated_at: `2016-10-26T03:37:51`
++ topic_id: 100
 
 ## PostItem
 + id: 100 (number)
@@ -42,6 +50,10 @@ Please read the *Authentication* part before you
 Register a user throught the API. You should pass the user credentials in the http POST body, and
 you will get a `jwt` token with expiration time.
 
+The `jwt` token is used for authentication; you need to add the authentication header, for example:
+
+*Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og* for endpoint that needs authentication.
+
 + Request (application/json)
 
         {
@@ -61,9 +73,14 @@ you will get a `jwt` token with expiration time.
 
 ## Login [/api/login/]
 
-### Logig and get the token [POST]
+### Login and get the token [POST]
 
-Login the user to get the `jwt` token needed for `create`, `update` topics and posts
+Login the user to get the `jwt` token.
+
+The `jwt` token is used for authentication; you need to add the authentication header, for example:
+
+*Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og* for endpoint that needs authentication.
+
 
 + Request (application/json)
 
@@ -86,6 +103,8 @@ Login the user to get the `jwt` token needed for `create`, `update` topics and p
 
 ### List All Topics [GET]
 
+List all topics.
+
 + Response 200 (application/json)
 
     + Attributes (array[TopicSimple])
@@ -93,8 +112,7 @@ Login the user to get the `jwt` token needed for `create`, `update` topics and p
 
 ### Create a New Topic [POST]
 
-**You need to get a valid *jwt* token and put it in your http header when you create a topic.
-To get a valid jwt token, please see the *Login* section.**
+Authentication required. Create a new topic.
 
 + Request (application/json)
 
@@ -112,16 +130,15 @@ To get a valid jwt token, please see the *Login* section.**
 + Response 201 (application/json)
 
     + Body
+    
+            + Attributes (TopicSimple)
 
-            {
-                "title": "Some nice title for the topic",
-                "content": "Some nice content for the topic"
-            }
-        
 
 ## Topic [/api/topics/{topic_id}]
 
 ### Show a Topic [GET]
+
+Show a topic's details including each post's information.
 
 + Parameters
 
@@ -133,8 +150,8 @@ To get a valid jwt token, please see the *Login* section.**
         
 
 ### Update a Topic [PUT]
-**You need to get a valid *jwt* token and put it in your http header when you create a topic.
-To get a valid jwt token, please see the *Login* section.**
+
+Authentication required. Update a topic's title or content.
 
 + Request (application/json)
 
@@ -154,10 +171,7 @@ To get a valid jwt token, please see the *Login* section.**
 
     + Body
 
-            {
-                "title": "Some nice title for the topic",
-                "content": "Some nice content for the topic"
-            }
+            + Attributes (TopicSimple)
             
 
 
@@ -166,8 +180,7 @@ To get a valid jwt token, please see the *Login* section.**
 
 ### Create a New Post [POST]
 
-**You need to get a valid *jwt* token and put it in your http header when you create a topic.
-To get a valid jwt token, please see the *Login* section.**
+Authentication required. Create a new post (reply to a topic).
 
 
 + Parameters
@@ -191,16 +204,15 @@ To get a valid jwt token, please see the *Login* section.**
 + Response 201 (application/json)
 
     + Body
+    
+            + Attributes (PostSimple)
 
-            {
-                "id": 123
-            }
             
 ## Post [/{topic_id}/posts/{post_id}]
 
 ### Update a Post [PUT]
-**You need to get a valid *jwt* token and put it in your http header when you create a topic.
-To get a valid jwt token, please see the *Login* section.**
+
+Authentication required. Update a post's content.
 
 + Parameters
 
@@ -225,6 +237,4 @@ To get a valid jwt token, please see the *Login* section.**
 
     + Body
 
-            {
-                "id": 123
-            }
+            + Attributes (PostSimple)

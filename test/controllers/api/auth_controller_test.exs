@@ -13,7 +13,7 @@ defmodule Roman.Api.AuthControllerTest do
 
   test "register the user and return a valid jwt", %{conn: conn} do
     conn = post conn, auth_path(conn, :register), user: @valid_attrs
-    assert json_response(conn, 200)["data"]["jwt"]
+    assert json_response(conn, 200)["jwt"]
     assert Repo.get_by(User, %{name: @valid_attrs.name})
   end
 
@@ -22,7 +22,7 @@ defmodule Roman.Api.AuthControllerTest do
     Repo.insert(changeset)
 
     conn = post conn, auth_path(conn, :login), user: @valid_attrs
-    assert json_response(conn, 200)["data"]["jwt"]
+    assert json_response(conn, 200)["jwt"]
   end
 
 end

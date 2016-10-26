@@ -39,7 +39,7 @@ defmodule Roman.Api.AuthController do
 
         new_conn
         |> put_status(:ok)
-        |> render("show.json", jwt: jwt, exp: exp)
+        |> render("show.json", %{jwt: jwt, exp: exp})
       true ->
         conn
         |> put_status(:unauthorized)

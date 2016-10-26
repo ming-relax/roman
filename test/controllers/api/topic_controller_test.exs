@@ -12,7 +12,7 @@ defmodule Roman.TopicControllerTest do
   describe "GET index" do
     test "lists 0 entry when there is no topic", %{conn: conn} do
       conn = get conn, topic_path(conn, :index)
-      assert json_response(conn, 200)["data"] == []
+      assert json_response(conn, 200) == []
     end
 
     test "list all entries when there are topics", %{conn: conn} do

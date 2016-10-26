@@ -2,7 +2,7 @@ defmodule Roman.Api.TopicView do
   use Roman.Web, :view
 
   def render("index.json", %{topics: topics}) do
-    %{data: render_many(topics, Roman.Api.TopicView, "topic_simple.json")}
+    render_many(topics, Roman.Api.TopicView, "topic_simple.json")
   end
 
   def render("show.json", %{topic: topic, posts: posts}) do

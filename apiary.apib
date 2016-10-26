@@ -52,7 +52,7 @@ you will get a `jwt` token with expiration time.
 
 The `jwt` token is used for authentication; you need to add the authentication header, for example:
 
-`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og` for endpoint that needs authentication.
+`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg` for endpoint that needs authentication.
 
 + Request (application/json)
 
@@ -67,7 +67,7 @@ The `jwt` token is used for authentication; you need to add the authentication h
 + Response 201 (applicaiton/json)
 
         {
-            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og",
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg",
             "exp": "32312111"
         }
 
@@ -79,7 +79,7 @@ Login the user to get the `jwt` token.
 
 The `jwt` token is used for authentication; you need to add the authentication header, for example:
 
-`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og` for endpoint that needs authentication.
+`Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg` for endpoint that needs authentication.
 
 
 + Request (application/json)
@@ -94,7 +94,7 @@ The `jwt` token is used for authentication; you need to add the authentication h
 + Response 201 (applicaiton/json)
 
         {
-            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjMiLCJleHAiOjE0ODAwNDY1NDQsImlhdCI6MTQ3NzQ1NDU0NCwiaXNzIjoiUm9tYW4iLCJqdGkiOiI2NTE3OTY5Ni1hMGEwLTRlMjctODExOS02NWMyY2NlZWNlNDEiLCJwZW0iOnt9LCJzdWIiOiJVc2VyOjMiLCJ0eXAiOiJhY2Nlc3MifQ.j2sxJbecY0clnjCGCC9NlRM_GERU8C8wdXSVzI6DDTrKqW0mjJCDZYLQh1XH0pdw_b5C99fz9TOb0K5h18O3Og",
+            "jwt": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJVc2VyOjEyIiwiZXhwIjoxNDgwMDc2MDExLCJpYXQiOjE0Nzc0ODQwMTEsImlzcyI6IlJvbWFuIiwianRpIjoiZmMzYjkxYmUtMTU1OC00NmVlLWEzYTgtYTg3MmY2ZGRkMTkzIiwicGVtIjp7fSwic3ViIjoiVXNlcjoxMiIsInR5cCI6ImFjY2VzcyJ9.ftbwm6_Z0pWUPpwW5eQHpHW2mSzVtOJH1Y7degH5Jx5aPnymyBNj3liymgNZCNKhMCL6u3GRHiChkLGTu8RzLg",
             "exp": "32312111"
         }
 
@@ -123,8 +123,10 @@ Authentication required. Create a new topic.
     + Body
 
             {
-                "title": "Some nice title for the topic",
-                "content": "Some nice content for the topic"
+                "topic" => {
+                    "title": "Some nice title for the topic",
+                    "content": "Some nice content for the topic"
+                }
             }
             
 + Response 201 (application/json)
@@ -162,8 +164,10 @@ Authentication required. Update a topic's title or content.
     + Body
 
             {
-                "title": "Some nice title for the topic",
-                "content": "Some nice content for the topic"
+                "topic": {
+                    "title": "Some nice title for the topic",
+                    "content": "Some nice content for the topic"
+                }
             }
             
     

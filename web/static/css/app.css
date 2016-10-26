@@ -1,5 +1,6 @@
 /* This file is for your main application css. */
 
-#signup-form-container {
-  margin-top: 20%;
+h1 {
+  text-align: center;
+  padding: 100px;
 }

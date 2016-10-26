@@ -123,6 +123,10 @@ To get a valid jwt token, please see the *Login* section.**
 
 ### Show a Topic [GET]
 
++ Parameters
+
+    + topic_id - Unique id for this topic
+
 + Response 200 (application/json)
 
     + Attributes (array[TopicDetail])
@@ -166,6 +170,10 @@ To get a valid jwt token, please see the *Login* section.**
 To get a valid jwt token, please see the *Login* section.**
 
 
++ Parameters
+
+    + topic_id - Unique id of the topic this post will be created with
+
 + Request (application/json)
 
     + Headers
@@ -194,6 +202,10 @@ To get a valid jwt token, please see the *Login* section.**
 **You need to get a valid *jwt* token and put it in your http header when you create a topic.
 To get a valid jwt token, please see the *Login* section.**
 
++ Parameters
+
+    + topic_id - Unique id for the topis this post is created with
+    + post_id - Unique id for this post
 
 + Request (application/json)
 

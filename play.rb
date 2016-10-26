@@ -8,7 +8,7 @@ BASE_URL = if ENV['PLAY_ENV'] == 'test'
            end
 
 
-user_credentials = (1..10).to_a.map { |i| { name: "test-#{i}", password: 'test123' } }
+user_credentials = (1..10).to_a.map { |i| { name: "test-#{Time.now.to_i}-#{i}", password: 'test123' } }
 
 
 def register_user(conn, user_credential)

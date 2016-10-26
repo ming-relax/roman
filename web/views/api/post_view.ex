@@ -13,6 +13,7 @@ defmodule Roman.Api.PostView do
     %{id: post.id,
       content: post.content,
       inserted_at: post.inserted_at,
+      updated_at: post.updated_at,
       topic_id: post.topic_id}
   end
 end

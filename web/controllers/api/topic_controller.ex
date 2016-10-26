@@ -20,6 +20,7 @@ defmodule Roman.Api.TopicController do
               title: t.title,
               creator_user_name: topic_creator.name,
               inserted_at: t.inserted_at,
+              updated_at: t.updated_at,
               last_post_user_name: topic_replier.name,
               last_post_inserted_at: t.last_posted_at,
               posts_count: t.posts_count
@@ -62,6 +63,7 @@ defmodule Roman.Api.TopicController do
                           content: t.content,
                           creator_user_name: topic_creator.name,
                           inserted_at: t.inserted_at,
+                          updated_at: t.updated_at,
                           posts_count: t.posts_count
                          }
 

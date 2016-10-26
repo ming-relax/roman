@@ -10,7 +10,21 @@ Please read the *Authentication* part before you
 
 # Data Structures
 
-## TopicItemInList
+## TopicSimple
++ id: 42 (number)
++ title: Hello World (string)
++ posts_count: 1 (number)
++ inserted_at: `2016-10-26T03:37:51`
++ last_post_user_name: Ming
++ last_posted_at: `2016-10-26T03:37:51`
+
+## PostItem
++ id: 100 (number)
++ content: "Some reply" (string)
++ post_user_name: "Ming" (string)
++ inserted_at: `2016-10-26T03:37:51`
+
+## TopicDetail
 + id: 42 (number)
 + title: Hello World (string)
 + content: Content of this topic (string)
@@ -18,6 +32,8 @@ Please read the *Authentication* part before you
 + inserted_at: `2016-10-26T03:37:51`
 + last_post_user_name: Ming
 + last_posted_at: `2016-10-26T03:37:51`
++ posts (array[PostItem]) - A collection of post
+
 
 ## Registration [/api/register/]
 
@@ -72,7 +88,7 @@ Login the user to get the `jwt` token needed for `create`, `update` topics and p
 
 + Response 200 (application/json)
 
-    + Attributes (array[TopicItemInList])
+    + Attributes (array[TopicSimple])
     
 
 ### Create a New Topic [POST]
@@ -101,7 +117,17 @@ To get a valid jwt token, please see the *Login* section.**
                 "title": "Some nice title for the topic",
                 "content": "Some nice content for the topic"
             }
-            
+        
+
+## Topic [/api/topics/{topic_id}]
+
+### Show a Topic [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (array[TopicDetail])
+        
+
 ### Update a Topic [PUT]
 **You need to get a valid *jwt* token and put it in your http header when you create a topic.
 To get a valid jwt token, please see the *Login* section.**
@@ -111,8 +137,16 @@ To get a valid jwt token, please see the *Login* section.**
     + Headers
 
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NzkyODIwOTQsImlhdCI6MTQ3NjY5MDA5NCwia2lkIjoiYTdlODllZDIxIiwidWlkIjoiNzExOTEzNjcwNSJ9.MTYupgkaiCw47YOiMUud6ksgqidBSlrOCXdJPqo87BX6-xkGjsbewwadOc7O3jriU8wQG-VhqILMsEWe6Hcvdjg3yiVsWiiPUwMotNHRuWqZQ-HupEoT7p_O_su2O9XFG38yLZl6oYtH7Y-pmNbqK0HIY3jxWLhietT1i7bX6c_mIROz4lJTO9cqYy0UntDGTDDmhfuWYT5zAsSzGXKodzh2Cyjy1octFFj-fTpR4t3bUUEcU8xC0PXn1ojrfzdtIzKxXPgExoyubacIcvkmAyNQNSaEqvpEwCJ8E5r7o6OgYgzhlGiK2Jd7tA_LAVs8F4R5_TKJre9tci9H
+            
+    + Body
+
+            {
+                "title": "Some nice title for the topic",
+                "content": "Some nice content for the topic"
+            }
+            
     
-+ Response 201 (application/json)
++ Response 200 (application/json)
 
     + Body
 
@@ -123,7 +157,7 @@ To get a valid jwt token, please see the *Login* section.**
             
 
 
-## Posts [/:topic_id/posts]
+## Posts [/{topic_id}/posts]
 
 
 ### Create a New Post [POST]
